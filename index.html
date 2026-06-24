@@ -154,6 +154,37 @@ nav a:hover { color:var(--text); background:var(--card); }
 }
 .exec-card p { font-size:14px; color:var(--text-muted); line-height:1.7; }
 .exec-card .highlight { color:var(--ouro); font-weight:700; }
+.period-badge {
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(161,194,8,0.12); color:var(--clorofila);
+  font-size:12px; font-weight:600; padding:5px 14px; border-radius:20px;
+  margin-bottom:18px; border:1px solid rgba(161,194,8,0.25);
+}
+.month-breakdown { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px; }
+@media(max-width:768px){ .month-breakdown{ grid-template-columns:1fr; } }
+.month-card {
+  background:var(--card); border:1px solid var(--card-border);
+  border-radius:12px; padding:20px; border-top:3px solid var(--laranja);
+}
+.month-card h4 {
+  font-family:'Playfair Display',serif; font-size:18px; font-weight:800;
+  margin-bottom:12px; display:flex; align-items:center; justify-content:space-between;
+}
+.month-card h4 .mc-tag {
+  font-family:'Inter',sans-serif; font-size:11px; font-weight:700;
+  padding:3px 10px; border-radius:12px;
+}
+.month-card .mc-row {
+  display:flex; justify-content:space-between; padding:6px 0;
+  font-size:13px; border-bottom:1px solid var(--card-border);
+}
+.month-card .mc-row:last-of-type { border-bottom:none; }
+.month-card .mc-row span:first-child { color:var(--text-muted); }
+.month-card .mc-row span:last-child { font-weight:700; }
+.month-card .mc-analysis {
+  font-size:12px; color:var(--text-muted); line-height:1.6;
+  margin-top:12px; padding-top:12px; border-top:1px dashed var(--card-border);
+}
 
 /* ===== CHARTS ===== */
 .chart-container {
@@ -231,6 +262,21 @@ nav a:hover { color:var(--text); background:var(--card); }
   max-width:800px; margin:0 auto; text-align:left;
 }
 .dev-section p + p { margin-top:12px; }
+.dev-topics { max-width:820px; margin:0 auto; text-align:left; }
+.dev-topic {
+  display:flex; gap:14px; padding:14px 0;
+  border-bottom:1px solid rgba(255,102,0,0.15);
+}
+.dev-topic:last-child { border-bottom:none; }
+.dev-topic .dt-icon {
+  flex-shrink:0; width:36px; height:36px; border-radius:10px;
+  background:rgba(255,102,0,0.15); display:flex; align-items:center;
+  justify-content:center; font-size:18px;
+}
+.dev-topic .dt-text { flex:1; }
+.dev-topic .dt-title { font-size:14px; font-weight:700; color:var(--ouro); margin-bottom:3px; }
+.dev-topic .dt-desc { font-size:13px; color:var(--text-muted); line-height:1.6; }
+.dev-intro { font-size:14px; color:var(--text-muted); max-width:820px; margin:0 auto 8px; }
 
 /* ===== UPLOAD ===== */
 .upload-section {
@@ -277,6 +323,55 @@ footer a { color:var(--laranja); text-decoration:none; }
   font-size:12px; padding:2px 8px; border-radius:10px;
   background:rgba(255,255,255,0.05);
 }
+
+/* ===== WEATHER WIDGET ===== */
+.weather-section { padding:30px 0 10px; }
+.weather-now {
+  background:linear-gradient(135deg,rgba(23,77,34,0.5),rgba(30,107,46,0.25));
+  border:1px solid var(--card-border); border-radius:16px;
+  padding:24px; display:flex; align-items:center; gap:24px; flex-wrap:wrap;
+  margin-bottom:16px;
+}
+.weather-now .now-icon { font-size:56px; line-height:1; }
+.weather-now .now-info { flex:1; min-width:180px; }
+.weather-now .now-temp { font-size:40px; font-weight:800; line-height:1; }
+.weather-now .now-desc { font-size:14px; color:var(--text-muted); margin-top:4px; }
+.weather-now .now-meta { display:flex; gap:18px; margin-top:10px; flex-wrap:wrap; }
+.weather-now .now-meta span { font-size:12px; color:var(--text-dim); }
+.weather-now .now-meta strong { color:var(--text); font-weight:600; }
+.weather-now .now-loc {
+  font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+  color:var(--clorofila); margin-bottom:6px;
+}
+.weather-now .now-updated { font-size:11px; color:var(--text-dim); margin-top:8px; }
+
+.forecast-grid {
+  display:grid; grid-template-columns:repeat(7,1fr); gap:10px;
+}
+@media(max-width:780px){ .forecast-grid{ grid-template-columns:repeat(4,1fr); } }
+@media(max-width:480px){ .forecast-grid{ grid-template-columns:repeat(3,1fr); } }
+.forecast-day {
+  background:var(--card); border:1px solid var(--card-border);
+  border-radius:12px; padding:14px 8px; text-align:center; cursor:pointer;
+  transition:all .25s;
+}
+.forecast-day:hover, .forecast-day.sel {
+  border-color:var(--laranja); transform:translateY(-3px);
+  background:rgba(255,102,0,0.08);
+}
+.forecast-day .fc-day { font-size:11px; font-weight:700; color:var(--text-muted); text-transform:uppercase; }
+.forecast-day .fc-icon { font-size:30px; margin:8px 0; }
+.forecast-day .fc-max { font-size:16px; font-weight:800; }
+.forecast-day .fc-min { font-size:12px; color:var(--text-dim); }
+.forecast-day .fc-rain { font-size:11px; color:#60a5fa; margin-top:4px; }
+.forecast-detail {
+  background:var(--card); border:1px solid var(--card-border);
+  border-radius:12px; padding:18px 20px; margin-top:12px;
+  font-size:13px; color:var(--text-muted); line-height:1.7;
+  border-left:4px solid var(--laranja);
+}
+.forecast-detail strong { color:var(--ouro); }
+.weather-loading { text-align:center; padding:30px; color:var(--text-dim); font-size:13px; }
 </style>
 </head>
 <body>
@@ -288,6 +383,7 @@ footer a { color:var(--laranja); text-decoration:none; }
       <div class="logo-text">Corajoso <span>Dashboard</span></div>
     </div>
     <nav>
+      <a href="#clima">Clima</a>
       <a href="#resumo">Resumo</a>
       <a href="#graficos">Gráficos</a>
       <a href="#diario">Diário</a>
@@ -310,6 +406,12 @@ footer a { color:var(--laranja); text-decoration:none; }
 
 <div class="container">
 
+  <!-- WEATHER -->
+  <section class="weather-section" id="clima">
+    <div class="section-header"><div class="bar"></div><h2>Previsão do <span>Tempo</span> — Canela/RS</h2></div>
+    <div id="weatherContent"><div class="weather-loading">Carregando previsão do tempo…</div></div>
+  </section>
+
   <!-- KPI -->
   <section class="kpi-section" id="resumo">
     <div class="kpi-grid" id="kpiGrid"></div>
@@ -318,12 +420,17 @@ footer a { color:var(--laranja); text-decoration:none; }
   <!-- EXEC SUMMARY -->
   <section class="section">
     <div class="section-header"><div class="bar"></div><h2>Resumo <span>Executivo</span></h2></div>
+    <div id="periodBadge"></div>
     <div class="exec-grid" id="execGrid"></div>
+    <div class="month-breakdown" id="monthBreakdown"></div>
   </section>
 
   <!-- MONTH FILTER -->
   <section class="section" id="graficos">
     <div class="section-header"><div class="bar"></div><h2>Gráficos <span>Comparativos</span></h2></div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;max-width:760px">
+      Comparação entre o que foi <strong style="color:var(--verde-light)">projetado</strong> (meta planejada) e o que foi <strong style="color:var(--laranja)">realizado</strong> (resultado efetivo) a cada dia. Use os botões abaixo para filtrar por mês. Quando a barra laranja/dourada ultrapassa a verde, a meta foi superada.
+    </p>
     <div class="month-filter" id="monthFilter"></div>
     <div class="chart-row">
       <div class="chart-container"><h3>PAX — Projetado vs Realizado</h3><canvas id="chartPax"></canvas></div>
@@ -334,16 +441,22 @@ footer a { color:var(--laranja); text-decoration:none; }
   <!-- MONTHLY EVOLUTION -->
   <section class="section">
     <div class="section-header"><div class="bar"></div><h2>Evolução <span>Mensal</span></h2></div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;max-width:760px">
+      Desempenho consolidado de cada mês (não acumulado). Cada par de barras mostra o total projetado e realizado do mês, com o percentual de atingimento da meta exibido acima.
+    </p>
     <div class="chart-row">
-      <div class="chart-container"><h3>Total PAX por Mês</h3><canvas id="chartMonthPax"></canvas></div>
-      <div class="chart-container"><h3>Total Corajoso Vendido por Mês</h3><canvas id="chartMonthCoraj"></canvas></div>
+      <div class="chart-container"><h3>Corajoso Vendido — por Mês</h3><canvas id="chartMonthCoraj"></canvas></div>
+      <div class="chart-container"><h3>Atingimento da Meta — % por Mês</h3><canvas id="chartMonthPct"></canvas></div>
     </div>
   </section>
 
   <!-- DAILY EVOLUTION -->
   <section class="section" id="diario">
     <div class="section-header"><div class="bar"></div><h2>Evolução <span>Diária</span></h2></div>
-    <div class="chart-container"><h3>Taxa de Conversão Real (Corajoso / PAX)</h3><canvas id="chartConvDaily"></canvas></div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;max-width:760px">
+      Taxa de conversão dia a dia — quantos visitantes (PAX) recebidos efetivamente compraram o Corajoso. A linha verde mostra o realizado; a linha laranja tracejada é a meta de conversão projetada.
+    </p>
+    <div class="chart-container"><h3>Taxa de Conversão Real (Corajoso ÷ PAX)</h3><canvas id="chartConvDaily"></canvas></div>
   </section>
 
   <!-- RANKING -->
@@ -364,11 +477,44 @@ footer a { color:var(--laranja); text-decoration:none; }
   <div class="dev-section">
     <div class="dev-badge">EM DESENVOLVIMENTO</div>
     <h3>Cortesia Aniversariante</h3>
-    <p>Estamos desenvolvendo um benefício especial para visitantes que comemoram aniversário no Parque do Caracol.</p>
-    <p>O aniversariante receberá cortesia do atrativo opcional escolhido (Corajoso ou Ousado), desde que três acompanhantes adquiram o mesmo atrativo.</p>
-    <p>Também será possível realizar os dois atrativos. Nesse caso, o aniversariante e todos os acompanhantes deverão adquirir o combo dos dois atrativos, sendo concedida apenas a cortesia correspondente ao aniversariante.</p>
-    <p>O ingresso de acesso ao parque continua sendo cobrado normalmente para todos os visitantes, incluindo o aniversariante.</p>
-    <p>A ação tem como objetivo incentivar a venda dos atrativos opcionais e ampliar a experiência dos visitantes.</p>
+    <p class="dev-intro">Estamos desenvolvendo um benefício especial para visitantes que comemoram aniversário no Parque do Caracol.</p>
+    <div class="dev-topics">
+      <div class="dev-topic">
+        <div class="dt-icon">🎁</div>
+        <div class="dt-text">
+          <div class="dt-title">Cortesia do atrativo opcional</div>
+          <div class="dt-desc">O aniversariante recebe cortesia do atrativo opcional escolhido — Corajoso ou Ousado.</div>
+        </div>
+      </div>
+      <div class="dev-topic">
+        <div class="dt-icon">👥</div>
+        <div class="dt-text">
+          <div class="dt-title">Condição: 3 acompanhantes</div>
+          <div class="dt-desc">A cortesia é válida desde que três acompanhantes adquiram o mesmo atrativo escolhido pelo aniversariante.</div>
+        </div>
+      </div>
+      <div class="dev-topic">
+        <div class="dt-icon">🎟️</div>
+        <div class="dt-text">
+          <div class="dt-title">Opção pelos dois atrativos (combo)</div>
+          <div class="dt-desc">Para realizar os dois atrativos, o aniversariante e todos os acompanhantes devem adquirir o combo dos dois — sendo concedida apenas a cortesia correspondente ao aniversariante.</div>
+        </div>
+      </div>
+      <div class="dev-topic">
+        <div class="dt-icon">🏞️</div>
+        <div class="dt-text">
+          <div class="dt-title">Ingresso do parque cobrado normalmente</div>
+          <div class="dt-desc">O ingresso de acesso ao parque continua sendo cobrado para todos os visitantes, incluindo o aniversariante.</div>
+        </div>
+      </div>
+      <div class="dev-topic">
+        <div class="dt-icon">🎯</div>
+        <div class="dt-text">
+          <div class="dt-title">Objetivo da ação</div>
+          <div class="dt-desc">Incentivar a venda dos atrativos opcionais e ampliar a experiência dos visitantes.</div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- UPLOAD -->
@@ -430,6 +576,104 @@ let RAW_DATA = [{"date":"2026-05-01","dateLabel":"01/05","weekday":"sex","paxPro
   }, 5000);
 })();
 
+// ===== WEATHER WIDGET (Open-Meteo, atualiza diariamente) =====
+(function() {
+  const WMO = {
+    0:['☀️','Céu limpo'],1:['🌤️','Predomínio de sol'],2:['⛅','Parcialmente nublado'],
+    3:['☁️','Nublado'],45:['🌫️','Névoa'],48:['🌫️','Névoa com geada'],
+    51:['🌦️','Garoa leve'],53:['🌦️','Garoa'],55:['🌧️','Garoa intensa'],
+    56:['🌧️','Garoa congelante'],57:['🌧️','Garoa congelante'],
+    61:['🌧️','Chuva fraca'],63:['🌧️','Chuva'],65:['⛈️','Chuva forte'],
+    66:['🌧️','Chuva congelante'],67:['🌧️','Chuva congelante'],
+    71:['🌨️','Neve fraca'],73:['🌨️','Neve'],75:['❄️','Neve forte'],
+    77:['🌨️','Grãos de neve'],
+    80:['🌦️','Pancadas leves'],81:['🌧️','Pancadas de chuva'],82:['⛈️','Pancadas fortes'],
+    85:['🌨️','Pancadas de neve'],86:['❄️','Pancadas de neve'],
+    95:['⛈️','Tempestade'],96:['⛈️','Tempestade com granizo'],99:['⛈️','Tempestade com granizo']
+  };
+  const DOW = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+  const url = 'https://api.open-meteo.com/v1/forecast?latitude=-29.3628&longitude=-50.8156'
+    + '&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m'
+    + '&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,wind_speed_10m_max'
+    + '&timezone=America%2FSao_Paulo&forecast_days=7';
+
+  const container = document.getElementById('weatherContent');
+
+  fetch(url).then(r => r.json()).then(d => {
+    const cur = d.current;
+    const dl = d.daily;
+    const [cIcon, cDesc] = WMO[cur.weather_code] || ['🌡️','—'];
+    const now = new Date();
+    const updated = now.toLocaleString('pt-BR', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' });
+
+    let forecastHTML = '';
+    for (let i = 0; i < dl.time.length; i++) {
+      const dt = new Date(dl.time[i] + 'T12:00:00');
+      const [icon] = WMO[dl.weather_code[i]] || ['🌡️','—'];
+      const isToday = i === 0;
+      forecastHTML += `<div class="forecast-day${isToday ? ' sel' : ''}" data-i="${i}">
+        <div class="fc-day">${isToday ? 'Hoje' : DOW[dt.getDay()]}</div>
+        <div class="fc-icon">${icon}</div>
+        <div class="fc-max">${Math.round(dl.temperature_2m_max[i])}°</div>
+        <div class="fc-min">${Math.round(dl.temperature_2m_min[i])}°</div>
+        <div class="fc-rain">💧 ${dl.precipitation_probability_max[i] ?? 0}%</div>
+      </div>`;
+    }
+
+    container.innerHTML = `
+      <div class="weather-now">
+        <div class="now-icon">${cIcon}</div>
+        <div class="now-info">
+          <div class="now-loc">Agora em Canela</div>
+          <div class="now-temp">${Math.round(cur.temperature_2m)}°C</div>
+          <div class="now-desc">${cDesc} · sensação ${Math.round(cur.apparent_temperature)}°C</div>
+          <div class="now-meta">
+            <span>💧 Umidade <strong>${cur.relative_humidity_2m}%</strong></span>
+            <span>💨 Vento <strong>${Math.round(cur.wind_speed_10m)} km/h</strong></span>
+          </div>
+          <div class="now-updated">Atualizado em ${updated}</div>
+        </div>
+      </div>
+      <div class="forecast-grid" id="forecastGrid">${forecastHTML}</div>
+      <div class="forecast-detail" id="forecastDetail"></div>
+    `;
+
+    // Interaction: click a day to see analysis
+    function showDetail(i) {
+      const dt = new Date(dl.time[i] + 'T12:00:00');
+      const [icon, desc] = WMO[dl.weather_code[i]] || ['🌡️','—'];
+      const rain = dl.precipitation_probability_max[i] ?? 0;
+      const max = Math.round(dl.temperature_2m_max[i]);
+      const min = Math.round(dl.temperature_2m_min[i]);
+      const wind = Math.round(dl.weather_code[i] ? dl.wind_speed_10m_max[i] : dl.wind_speed_10m_max[i]);
+      const dayName = i === 0 ? 'Hoje' : DOW[dt.getDay()] + ', ' + dt.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'});
+
+      let impacto;
+      if (rain >= 60) impacto = 'Alta probabilidade de chuva — historicamente os dias chuvosos reduzem o fluxo e as vendas do Corajoso. Recomenda-se reforço de abordagem comercial interna e comunicação de que o atrativo opera normalmente.';
+      else if (rain >= 30) impacto = 'Chance moderada de chuva — fluxo pode oscilar ao longo do dia. Bom momento para ações de venda direcionadas nas janelas de tempo firme.';
+      else if (max >= 25) impacto = 'Tempo firme e quente — condição favorável ao maior fluxo de visitantes e às melhores conversões do Corajoso. Dia ideal para metas ampliadas.';
+      else impacto = 'Tempo firme — condições favoráveis para visitação e venda do Corajoso, sem restrição climática relevante.';
+
+      document.getElementById('forecastDetail').innerHTML =
+        `${icon} <strong>${dayName}</strong> — ${desc}. Máxima de <strong>${max}°C</strong>, mínima de <strong>${min}°C</strong>, `
+        + `chance de chuva <strong>${rain}%</strong>, vento até <strong>${Math.round(dl.wind_speed_10m_max[i])} km/h</strong>.<br><br>`
+        + `<strong>Impacto previsto no Corajoso:</strong> ${impacto}`;
+    }
+
+    const grid = document.getElementById('forecastGrid');
+    grid.querySelectorAll('.forecast-day').forEach(el => {
+      el.addEventListener('click', () => {
+        grid.querySelectorAll('.forecast-day').forEach(d => d.classList.remove('sel'));
+        el.classList.add('sel');
+        showDetail(parseInt(el.dataset.i));
+      });
+    });
+    showDetail(0);
+  }).catch(err => {
+    container.innerHTML = '<div class="weather-loading">Não foi possível carregar a previsão do tempo no momento. Tente recarregar a página.</div>';
+  });
+})();
+
 // ===== MONTH NAMES =====
 const MONTH_NAMES = {1:'Janeiro',2:'Fevereiro',3:'Março',4:'Abril',5:'Maio',6:'Junho',7:'Julho',8:'Agosto',9:'Setembro',10:'Outubro',11:'Novembro',12:'Dezembro'};
 const WEEKDAY_FULL = {'seg':'Segunda','ter':'Terça','qua':'Quarta','qui':'Quinta','sex':'Sexta','sáb':'Sábado','dom':'Domingo'};
@@ -487,6 +731,14 @@ function render(data) {
   `;
 
   // ===== EXEC SUMMARY =====
+  // Period badge
+  const realDates = realized.map(d => d.date).sort();
+  const firstD = realDates[0] ? realDates[0].split('-').reverse().join('/') : '—';
+  const lastD = realDates[realDates.length-1] ? realDates[realDates.length-1].split('-').reverse().join('/') : '—';
+  const monthsAnalyzed = months.filter(m => realized.some(d => d.month === m)).map(m => MONTH_NAMES[m]).join(' e ');
+  document.getElementById('periodBadge').innerHTML =
+    `<div class="period-badge">📆 Período analisado: ${firstD} a ${lastD} · ${monthsAnalyzed} de 2026 · ${realized.length} dias com dados</div>`;
+
   const weekdayPerf = {};
   realized.forEach(d => {
     if (!weekdayPerf[d.weekday]) weekdayPerf[d.weekday] = { coraj: 0, pax: 0, n: 0 };
@@ -540,6 +792,37 @@ function render(data) {
       })() : 'Dados insuficientes para análise de tendência.'}</p>
     </div>
   `;
+
+  // ===== MONTH-BY-MONTH BREAKDOWN =====
+  const mbContainer = document.getElementById('monthBreakdown');
+  const monthsWithData = months.filter(m => realized.some(d => d.month === m));
+  mbContainer.innerHTML = monthsWithData.map(m => {
+    const md = realized.filter(d => d.month === m);
+    const corajR = md.reduce((s,d) => s + (d.corajReal||0), 0);
+    const corajP = md.reduce((s,d) => s + d.corajProj, 0);
+    const paxR = md.reduce((s,d) => s + (d.paxReal||0), 0);
+    const paxP = md.reduce((s,d) => s + d.paxProj, 0);
+    const ach = corajP > 0 ? (corajR / corajP * 100) : 0;
+    const conv = paxR > 0 ? (corajR / paxR * 100) : 0;
+    const best = md.slice().sort((a,b) => (b.corajReal||0)-(a.corajReal||0))[0];
+    const above = md.filter(d => (d.corajReal||0) >= d.corajProj).length;
+    const tagColor = ach >= 90 ? 'var(--success)' : ach >= 70 ? 'var(--ouro)' : 'var(--danger)';
+    const tagBg = ach >= 90 ? 'rgba(34,197,94,0.15)' : ach >= 70 ? 'rgba(255,185,6,0.15)' : 'rgba(239,68,68,0.15)';
+
+    let analysis;
+    if (ach >= 100) analysis = `Mês de superação: as vendas ultrapassaram a meta projetada. Conversão média de ${conv.toFixed(2)}% e ${above} dia(s) acima da meta confirmam o forte desempenho.`;
+    else if (ach >= 80) analysis = `Mês sólido, próximo da meta (${ach.toFixed(0)}%). Conversão média de ${conv.toFixed(2)}%. O melhor dia foi ${best.dateLabel} com ${best.corajReal} vendas.`;
+    else analysis = `Mês abaixo da meta (${ach.toFixed(0)}%), com conversão média de ${conv.toFixed(2)}%. Há oportunidade de reforço comercial; o melhor dia foi ${best.dateLabel} (${best.corajReal} vendas).`;
+
+    return `<div class="month-card">
+      <h4>${MONTH_NAMES[m]} <span class="mc-tag" style="color:${tagColor};background:${tagBg}">${ach.toFixed(0)}% da meta</span></h4>
+      <div class="mc-row"><span>Corajoso vendido</span><span>${corajR.toLocaleString('pt-BR')} <span style="color:var(--text-dim);font-weight:400">/ ${corajP.toLocaleString('pt-BR')}</span></span></div>
+      <div class="mc-row"><span>PAX recebidos</span><span>${paxR.toLocaleString('pt-BR')}</span></div>
+      <div class="mc-row"><span>Conversão média</span><span>${conv.toFixed(2)}%</span></div>
+      <div class="mc-row"><span>Dias acima da meta</span><span>${above} de ${md.length}</span></div>
+      <div class="mc-analysis">${analysis}</div>
+    </div>`;
+  }).join('');
 
   // ===== MONTH FILTER =====
   let activeMonth = 0; // 0 = todos
@@ -613,55 +896,82 @@ function updateCharts(data, realized, month) {
 }
 
 function renderMonthlyCharts(realized, months) {
-  const monthData = months.map(m => {
+  const monthsWithData = months.filter(m => realized.some(d => d.month === m));
+  const monthData = monthsWithData.map(m => {
     const md = realized.filter(d => d.month === m);
+    const corajProj = md.reduce((s,d) => s + d.corajProj, 0);
+    const corajReal = md.reduce((s,d) => s + (d.corajReal||0), 0);
     return {
       label: MONTH_NAMES[m],
-      paxProj: md.reduce((s,d) => s + d.paxProj, 0),
-      paxReal: md.reduce((s,d) => s + (d.paxReal||0), 0),
-      corajProj: md.reduce((s,d) => s + d.corajProj, 0),
-      corajReal: md.reduce((s,d) => s + (d.corajReal||0), 0),
+      corajProj, corajReal,
+      ach: corajProj > 0 ? (corajReal / corajProj * 100) : 0
     };
   });
 
-  const opts = {
-    responsive: true,
-    plugins: {
-      legend: { labels: { color: '#8fa896', font: { size: 11 } } },
-    },
-    scales: {
-      x: { ticks: { color: '#5e7a64' }, grid: { color: 'rgba(255,255,255,0.04)' } },
-      y: { ticks: { color: '#5e7a64' }, grid: { color: 'rgba(255,255,255,0.06)' }, beginAtZero: true }
-    }
-  };
+  if (charts.monthCoraj) charts.monthCoraj.destroy();
+  if (charts.monthPct) charts.monthPct.destroy();
 
-  new Chart(document.getElementById('chartMonthPax'), {
+  // Chart 1: Corajoso projetado vs realizado por mês (grouped bars, value labels)
+  charts.monthCoraj = new Chart(document.getElementById('chartMonthCoraj'), {
     type: 'bar',
     data: {
       labels: monthData.map(d => d.label),
       datasets: [
-        { label: 'Projetado', data: monthData.map(d => d.paxProj), backgroundColor: 'rgba(23,77,34,0.7)', borderRadius: 4 },
-        { label: 'Realizado', data: monthData.map(d => d.paxReal), backgroundColor: 'rgba(255,102,0,0.8)', borderRadius: 4 }
+        { label: 'Projetado (meta)', data: monthData.map(d => d.corajProj), backgroundColor: 'rgba(23,77,34,0.75)', borderRadius: 6, barPercentage: 0.7 },
+        { label: 'Realizado', data: monthData.map(d => d.corajReal), backgroundColor: 'rgba(255,185,6,0.9)', borderRadius: 6, barPercentage: 0.7 }
       ]
     },
-    options: opts
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { labels: { color: '#8fa896', font: { size: 12 }, padding: 14, usePointStyle: true } },
+        tooltip: {
+          backgroundColor: '#15261a', borderColor: '#1e3825', borderWidth: 1,
+          titleColor: '#e8efe9', bodyColor: '#8fa896', padding: 10,
+          callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y.toLocaleString('pt-BR')}` }
+        }
+      },
+      scales: {
+        x: { ticks: { color: '#c5d3c8', font: { size: 13, weight: '600' } }, grid: { display: false } },
+        y: { ticks: { color: '#5e7a64' }, grid: { color: 'rgba(255,255,255,0.06)' }, beginAtZero: true, title: { display: true, text: 'Vendas do Corajoso', color: '#5e7a64', font: { size: 11 } } }
+      }
+    }
   });
 
-  new Chart(document.getElementById('chartMonthCoraj'), {
+  // Chart 2: % atingimento da meta por mês (horizontal, color-coded)
+  charts.monthPct = new Chart(document.getElementById('chartMonthPct'), {
     type: 'bar',
     data: {
       labels: monthData.map(d => d.label),
-      datasets: [
-        { label: 'Projetado', data: monthData.map(d => d.corajProj), backgroundColor: 'rgba(23,77,34,0.7)', borderRadius: 4 },
-        { label: 'Realizado', data: monthData.map(d => d.corajReal), backgroundColor: 'rgba(255,185,6,0.8)', borderRadius: 4 }
-      ]
+      datasets: [{
+        label: '% da meta atingida',
+        data: monthData.map(d => d.ach),
+        backgroundColor: monthData.map(d => d.ach >= 90 ? 'rgba(34,197,94,0.85)' : d.ach >= 70 ? 'rgba(255,185,6,0.85)' : 'rgba(239,68,68,0.85)'),
+        borderRadius: 6, barPercentage: 0.6
+      }]
     },
-    options: opts
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#15261a', borderColor: '#1e3825', borderWidth: 1,
+          titleColor: '#e8efe9', bodyColor: '#8fa896', padding: 10,
+          callbacks: { label: ctx => `${ctx.parsed.x.toFixed(1)}% da meta` }
+        }
+      },
+      scales: {
+        x: { ticks: { color: '#5e7a64', callback: v => v + '%' }, grid: { color: 'rgba(255,255,255,0.06)' }, beginAtZero: true, suggestedMax: 100 },
+        y: { ticks: { color: '#c5d3c8', font: { size: 13, weight: '600' } }, grid: { display: false } }
+      }
+    }
   });
 }
 
 function renderDailyConvChart(realized) {
-  new Chart(document.getElementById('chartConvDaily'), {
+  if (charts.convDaily) charts.convDaily.destroy();
+  charts.convDaily = new Chart(document.getElementById('chartConvDaily'), {
     type: 'line',
     data: {
       labels: realized.map(d => d.dateLabel),
